@@ -1,1 +1,1 @@
-# autorevive
+# revivescript
