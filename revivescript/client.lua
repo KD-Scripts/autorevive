@@ -3,6 +3,7 @@ AddEventHandler('esx:onPlayerDeath', function(data)
 		playerPed = PlayerPedId()
 		if amount <= Config.ServiceCount then
 			if Config.FeeAfterRevive then
+				TriggerServerEvent('revivescript:FeeAfterRevive')
 				Citizen.Wait(Config.TimeToShowMenu * 1000)
 				if IsEntityDead(playerPed) then
 					revivequs(ped)
@@ -48,7 +49,10 @@ AddEventHandler('revivescript:bot', function(source)
 		TriggerServerEvent('revivescript:Removemoney')
 	end
 	Citizen.Wait(1000)
-	SetEntityCoords(PlayerPedId(), 282.8605041504, -582.64129638672, 43.272174835206)
+	if Config.ReviveTeleport then
+		--SetEntityCoords(PlayerPedId(), 282.8605041504, -582.64129638672, 43.272174835206)
+		SetEntityCoords(PlayerPedId(), Config.ReviveTeleportLoc.x, Config.ReviveTeleportLoc.y, Config.ReviveTeleportLoc.z)
+	end
 	exports['okokNotify']:Alert("EMS", "Revived", 3000, 'success')
 end)
 
